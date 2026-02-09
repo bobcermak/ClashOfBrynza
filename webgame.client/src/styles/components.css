@@ -917,12 +917,6 @@
   margin-top: 1rem;
 }
 
-@media (min-width: 1701px) {
-  .menu__container-credits {
-    margin-top: 5rem;
-  }
-}
-
 .menu__container-credits-title {
   font-size: var(--text-heading, 3.125rem);
   color: var(--white, #ffffff);
