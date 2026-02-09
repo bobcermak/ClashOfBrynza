@@ -786,8 +786,7 @@
   position: absolute;
   z-index: 0;
   pointer-events: none;
-  transform: translate(15px, 0px);
-  animation: float 12s linear infinite;
+  animation: float 8s linear infinite;
 }
 
 .menu__cloud-1 {
