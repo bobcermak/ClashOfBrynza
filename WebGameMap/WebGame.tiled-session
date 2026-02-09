@@ -1,0 +1,37 @@
+{
+    "activeFile": "WebGame.tmx",
+    "expandedProjectPaths": [
+    ],
+    "file.lastUsedOpenFilter": "Všechny soubory (*)",
+    "fileStates": {
+        "WebGame.tmx": {
+            "scale": 0.125,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 1816,
+                "y": 1476
+            }
+        },
+        "WebGame.tmx#TileMap-1": {
+            "scaleInDock": 0.75,
+            "scaleInEditor": 1
+        },
+        "WebGame.tmx#TileMap-2": {
+            "scaleInDock": 0.5,
+            "scaleInEditor": 1
+        }
+    },
+    "last.imagePath": "C:/Users/bohus/Desktop/WebGameMap",
+    "openFiles": [
+        "WebGame.tmx"
+    ],
+    "project": "WebGame.tiled-project",
+    "recentFiles": [
+        "WebGame.tmx"
+    ],
+    "tileset.embedInMap": true,
+    "tileset.tileSize": {
+        "height": 64,
+        "width": 64
+    }
+}

@@ -1,0 +1,28 @@
+# ASP.NET build folders
+bin/
+obj/
+
+# VS cache
+.vs/
+
+# Generated files
+*.g.cs
+*.generated.cs
+*.AssemblyAttributes.cs
+*.AssemblyInfo.cs
+*.AssemblyInfo.cache
+
+# Cache
+*.cache
+*.editorconfig
+
+# Node/React
+node_modules/
+build/
+dist/
+
+# Rider/VSCode
+.idea/
+.vscode/
+
+*.db

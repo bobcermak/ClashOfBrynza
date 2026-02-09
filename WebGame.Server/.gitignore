@@ -1,0 +1,34 @@
+# Build výstupy
+bin/
+obj/
+
+# User-specific soubory
+*.user
+*.userosscache
+*.suo
+
+# Visual Studio
+.vs/
+*.vcxproj.user
+*.rsuser
+
+# Rider / JetBrains
+.idea/
+
+# ASP.NET Core konfigurace (lokální)
+Properties/launchSettings.json
+
+# Závislosti NuGetu
+project.lock.json
+project.assets.json
+
+# Publish výstupy
+artifacts/
+
+# Logy
+*.log
+
+# Environment files
+appsettings.Development.json
+appsettings.Local.json
+appsettings.*.local.json

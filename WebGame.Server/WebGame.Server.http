@@ -1,0 +1,6 @@
+@WebGame.Server_HostAddress = http://localhost:5125
+
+GET {{WebGame.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

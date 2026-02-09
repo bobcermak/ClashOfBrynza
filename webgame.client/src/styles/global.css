@@ -1,0 +1,104 @@
+@layer reset, init, typography, animations, content, components;
+@import url(normalize.css) layer(reset);
+@import url(typography.css) layer(typography);
+@import url(layout.css) layer(content);
+@import url(components.css) layer(components);
+
+@layer animations {
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+}
+
+@layer reset {
+  :root {
+    /*Colors*/
+
+    --white: #ffffff;
+    --black: #000000;
+    --beige: #f5ebc8;
+    --brown: #d09862;
+    --gray-brown: #9b7260;
+    --dark-brown: #6b4742;
+    --dark-brown-accent: #805953;
+    --blue: #4795a7;
+    --cyan: #8bd8c8;
+    --green: #455a4b;
+
+    /*Font-sizes*/
+
+    --text-body: 1rem;
+    /*16px*/
+    --text-sub: 1.5625rem;
+    /*25px*/
+    --text-title: 2.4375rem;
+    /*39px*/
+    --text-heading: 3.8125rem;
+    /*61px*/
+    --text-display: 4.6875rem;
+    /*75px*/
+
+    /*Settings*/
+
+    /*transitions*/
+
+    --transition: 0.25s ease-in-out;
+  }
+
+  html {
+    font-family: "Patrick Hand", cursive;
+    font-weight: 400;
+    font-size: var(--text-body, 1rem);
+    color: var(--black, #000000);
+    background-color: var(--blue, #4795a7);
+    scroll-behavior: smooth;
+    overscroll-behavior: none;
+    cursor:
+      url("/images/content/cursor.png") 32 32,
+      auto;
+  }
+
+  body {
+    min-height: 100vh;
+    min-height: 100svh;
+    overscroll-behavior: none;
+  }
+
+  canvas {
+    cursor:
+      url("/images/content/cursor.png") 32 32,
+      auto;
+  }
+}
+
+@layer init {
+  /*presets*/
+
+  /*img / iframe - responsive*/
+
+  .img-responsive,
+  .iframe-responsive {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: 0;
+    padding: 0;
+  }
+
+  /*svg - responsive*/
+
+  .svg-responsive {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+  }
+}
