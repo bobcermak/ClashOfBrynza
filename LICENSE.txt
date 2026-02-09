@@ -1,0 +1,9 @@
+MIT Licence
+
+Copyright (c) 2026 BobCermak
+
+Tímto se bezplatně uděluje povolení každé osobě, která získá kopii tohoto softwaru a souvisejících souborů dokumentace (dále jen "Software"), aby se Softwarem nakládala bez omezení, včetně, ale nikoli výhradně, práv používat, kopírovat, upravovat, slučovat, publikovat, distribuovat, udělovat podlicence a/nebo prodávat kopie Softwaru, a povoluje se to i osobám, kterým je Software k tomuto účelu poskytnut, za následujících podmínek:
+
+Výše uvedené oznámení o autorských právech a toto povolení musí být součástí všech kopií nebo podstatných částí Softwaru.
+
+SOFTWARE JE POSKYTOVÁN "TAK, JAK JE", BEZ ZÁRUKY JAKÉHOKOLI DRUHU, VÝSLOVNÉ NEBO PŘEDPOKLÁDANÉ, VČETNĚ, ALE NIKOLI VÝHRADNĚ, ZÁRUK PRODEJNOSTI, VHODNOSTI PRO KONKRÉTNÍ ÚČEL A NEPORUŠENÍ PRÁV. AUTORI NEBO DRŽITELÉ AUTORSKÝCH PRÁV V ŽÁDNÉM PŘÍPADĚ NEODPOVÍDAJÍ ZA JAKÉKOLI NÁROKY, ŠKODY NEBO JINOU ODPOVĚDNOST, AŤ UŽ NA ZÁKLADĚ SMLOUVY, DELIKTU NEBO JINAK, VYPLÝVAJÍCÍ Z TOHOTO SOFTWARU NEBO V SOUVISLOSTI S NÍM NEBO Z POUŽÍVÁNÍ ČI JINÉHO NAKLÁDÁNÍ SE SOFTWAREM.
