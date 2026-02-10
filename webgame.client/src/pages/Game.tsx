@@ -75,6 +75,7 @@ const Game: FC<GameProps> = ({ groundMapPromise, buildingsPromise, gameStateProm
   }, [isAddBuildingError, isUpgradeBuildingError]);
   //Advance game every 5 seconds
   useEffect(() => {
+    if (gameState.level >= 10) return;
     const interval = setInterval(async () => {
       if (gameState?.playerId) {
         const response = await fetch(`/api/game/advance/${gameState.playerId}`);
@@ -83,9 +84,9 @@ const Game: FC<GameProps> = ({ groundMapPromise, buildingsPromise, gameStateProm
           setGameState(updatedState);
         }
       }
-    }, 2500);
+    }, inStarvation ? 1500 : 2500);
     return () => clearInterval(interval);
-  }, [gameState?.playerId]);
+  }, [gameState?.playerId, gameState.level, inStarvation]);
   useEffect(() => {
     if (gameState.sheep < gameState.population) {
       setInStarvation(true);
@@ -101,9 +102,13 @@ const Game: FC<GameProps> = ({ groundMapPromise, buildingsPromise, gameStateProm
       if (updatedBuilding) setCurrentBuilding(updatedBuilding);
     } else setCurrentBuilding(null);
   };
-  const handleAddBuilding = async (buildingId: number, bottomLeftX: number, bottomLeftY: number) => {
+  const handleAddBuilding = async (buildingId: number, bottomLeftX: number, bottomLeftY: number): Promise<boolean> => {
     const data = await addBuilding(buildingId, bottomLeftX, bottomLeftY, gameState.playerId, setIsAddBuildingError);
-    if (data) setGameState(data);
+    if (data) {
+      setGameState(data);
+      return true;
+    }
+    return false;
   };
   const handleDeleteBuilding = async (mapBuilding: MapBuilding) => {
     const buildingToDelete = { ...mapBuilding };
@@ -245,10 +250,12 @@ const Game: FC<GameProps> = ({ groundMapPromise, buildingsPromise, gameStateProm
             buildingsMap={gameState.buildingMap}
             tileSize={54}
             placingBuilding={placingBuilding}
-            onMapClick={(x, y) => {
+            onMapClick={async (x, y) => {
               if (placingBuilding !== null) {
-                handleAddBuilding(placingBuilding.buildingId, x, y);
-                setPlacingBuilding(null);
+                const success = await handleAddBuilding(placingBuilding.buildingId, x, y);
+                if (success) {
+                  setPlacingBuilding(null);
+                }
               }
             }}
             onBuildingClick={(building) => {

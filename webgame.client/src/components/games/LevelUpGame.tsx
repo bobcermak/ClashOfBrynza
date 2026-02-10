@@ -102,8 +102,8 @@ const LevelUpGame: FC<LevelUpGameProps> = ({ currentLevel, villageToggle, onWin,
     let animationFrameId: number;
     if (!isPlaying || gameOver || isWinner) return;
     const animate = () => {
-      const baseSpeed = 0.15 + currentLevel * 0.08;
-      const randomChance = 0.002 + currentLevel * 0.002;
+      const baseSpeed = 0.6 + currentLevel * 0.03;
+      const randomChance = 0.001 + currentLevel * 0.0005;
       if (Math.random() < randomChance) {
         speedRef.current += 1.5 + currentLevel * 0.3;
       }
