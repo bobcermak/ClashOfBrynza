@@ -84,9 +84,9 @@ const Game: FC<GameProps> = ({ groundMapPromise, buildingsPromise, gameStateProm
           setGameState(updatedState);
         }
       }
-    }, inStarvation ? 1500 : 2500);
+    }, 2500);
     return () => clearInterval(interval);
-  }, [gameState?.playerId, gameState.level, inStarvation]);
+  }, [gameState?.playerId, gameState.level]);
   useEffect(() => {
     if (gameState.sheep < gameState.population) {
       setInStarvation(true);
