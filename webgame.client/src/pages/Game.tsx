@@ -73,7 +73,6 @@ const Game: FC<GameProps> = ({ groundMapPromise, buildingsPromise, gameStateProm
       return () => clearTimeout(timer);
     }
   }, [isAddBuildingError, isUpgradeBuildingError]);
-  //Advance game every 5 seconds
   useEffect(() => {
     if (gameState.level >= 10) return;
     const interval = setInterval(async () => {
@@ -84,9 +83,9 @@ const Game: FC<GameProps> = ({ groundMapPromise, buildingsPromise, gameStateProm
           setGameState(updatedState);
         }
       }
-    }, 2500);
+    }, inStarvation ? 1500 : 2500);
     return () => clearInterval(interval);
-  }, [gameState?.playerId, gameState.level]);
+  }, [gameState?.playerId, gameState.level, inStarvation]);
   useEffect(() => {
     if (gameState.sheep < gameState.population) {
       setInStarvation(true);
