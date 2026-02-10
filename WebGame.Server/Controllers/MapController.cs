@@ -120,10 +120,10 @@ namespace WebGame.Server.Controllers
             if (gameState.Population < currentLevelData?.PopulationCost) return BadRequest("Není dostatek obyvatel na vylepšení této budovy.");
             if (nextLevel > gameState.Level && !mapBuilding.Building.IsTownHall) return BadRequest("Nejprve musíte vylepšit radnici.");
             if (nextLevelData == null) return BadRequest("Budova je již na maximální úrovni.");
-            if (gameState.Sheep < nextLevelData.UpgradeCost) return BadRequest("Není dostatek prostředků na vylepšení této budovy.");
+            if (gameState.Sheep < currentLevelData?.UpgradeCost) return BadRequest("Není dostatek prostředků na vylepšení této budovy.");
 
             // deduct upgrade cost
-            gameState.Sheep -= nextLevelData.UpgradeCost;
+            gameState.Sheep -= currentLevelData.UpgradeCost;
 
             // update MaxPopulation
             int oldCapacity = currentLevelData?.Capacity ?? 0;

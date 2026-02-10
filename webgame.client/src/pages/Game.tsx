@@ -73,8 +73,8 @@ const Game: FC<GameProps> = ({ groundMapPromise, buildingsPromise, gameStateProm
       return () => clearTimeout(timer);
     }
   }, [isAddBuildingError, isUpgradeBuildingError]);
-  //Advance game every 5 seconds
   useEffect(() => {
+    if (gameState.level >= 10) return;
     const interval = setInterval(async () => {
       if (gameState?.playerId) {
         const response = await fetch(`/api/game/advance/${gameState.playerId}`);
@@ -83,9 +83,9 @@ const Game: FC<GameProps> = ({ groundMapPromise, buildingsPromise, gameStateProm
           setGameState(updatedState);
         }
       }
-    }, 2500);
+    }, inStarvation ? 1500 : 2500);
     return () => clearInterval(interval);
-  }, [gameState?.playerId]);
+  }, [gameState?.playerId, gameState.level, inStarvation]);
   useEffect(() => {
     if (gameState.sheep < gameState.population) {
       setInStarvation(true);
@@ -101,9 +101,13 @@ const Game: FC<GameProps> = ({ groundMapPromise, buildingsPromise, gameStateProm
       if (updatedBuilding) setCurrentBuilding(updatedBuilding);
     } else setCurrentBuilding(null);
   };
-  const handleAddBuilding = async (buildingId: number, bottomLeftX: number, bottomLeftY: number) => {
+  const handleAddBuilding = async (buildingId: number, bottomLeftX: number, bottomLeftY: number): Promise<boolean> => {
     const data = await addBuilding(buildingId, bottomLeftX, bottomLeftY, gameState.playerId, setIsAddBuildingError);
-    if (data) setGameState(data);
+    if (data) {
+      setGameState(data);
+      return true;
+    }
+    return false;
   };
   const handleDeleteBuilding = async (mapBuilding: MapBuilding) => {
     const buildingToDelete = { ...mapBuilding };
@@ -137,7 +141,9 @@ const Game: FC<GameProps> = ({ groundMapPromise, buildingsPromise, gameStateProm
     const data = await addSheep(gameState.playerId, -cost);
     if (data) setGameState((prev) => ({ ...prev, sheep: data.sheep }));
   };
-  const upgradeCost = gameState.buildingMap.buildings.find((b) => b.building.isTownHall)?.building?.levels.find((l) => l.level === gameState.level)?.upgradeCost ?? 0;
+  const townHall = gameState.buildingMap.buildings.find((b) => b.building.isTownHall);
+  const townHallLevel = townHall?.level ?? 1;
+  const upgradeCost = townHall?.building?.levels.find((l) => l.level === townHallLevel)?.upgradeCost ?? 0;
   return (
     <div className="game">
       <TutorialMonk />
@@ -245,10 +251,12 @@ const Game: FC<GameProps> = ({ groundMapPromise, buildingsPromise, gameStateProm
             buildingsMap={gameState.buildingMap}
             tileSize={54}
             placingBuilding={placingBuilding}
-            onMapClick={(x, y) => {
+            onMapClick={async (x, y) => {
               if (placingBuilding !== null) {
-                handleAddBuilding(placingBuilding.buildingId, x, y);
-                setPlacingBuilding(null);
+                const success = await handleAddBuilding(placingBuilding.buildingId, x, y);
+                if (success) {
+                  setPlacingBuilding(null);
+                }
               }
             }}
             onBuildingClick={(building) => {

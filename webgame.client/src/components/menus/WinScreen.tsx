@@ -20,7 +20,6 @@ const WinScreen: FC<WinScreenProps> = ({ onRestart, onHome }) => {
     },
     { scope: containerRef },
   );
-
   return (
     <div className="win-screen" ref={containerRef}>
       <div className="win-screen__content" ref={contentRef}>
@@ -38,5 +37,4 @@ const WinScreen: FC<WinScreenProps> = ({ onRestart, onHome }) => {
     </div>
   );
 };
-
 export default WinScreen;
