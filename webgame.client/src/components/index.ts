@@ -15,3 +15,4 @@ export { default as MusicButton } from "./buttons/MusicButton";
 export { default as TutorialMonk } from "./tutorial-monk/TutorialMonk";
 export { default as LevelUpGame } from "./games/LevelUpGame";
 export { default as WinScreen } from "./menus/WinScreen";
+export { default as Leaderboard } from "./menus/Leaderboard";

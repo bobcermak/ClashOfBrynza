@@ -8,7 +8,15 @@ export type GameState = {
   freeSpace: number;
   maxPopulation: number;
   lastUpdated: string;
+  createdAt: string;
+  playTimeSeconds: number;
   buildingMapId: number;
   buildingMap: Map;
   level: number;
+};
+export type LeaderboardEntry = {
+  nickname: string;
+  timeInSeconds: number;
+  completedAt: string;
+  playerId: string;
 };

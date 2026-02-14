@@ -16,6 +16,7 @@ namespace WebGame.Server.Data
         public DbSet<MapBuilding> MapBuildings { get; set; } = null!;
         public DbSet<BuildingLevel> BuildingLevels { get; set; } = null!;
         public DbSet<Resource> Resources { get; set; } = null!;
+        public DbSet<LeaderboardEntry> LeaderboardEntries { get; set; } = null!;
         // Data
         private void SeedResources(ModelBuilder modelBuilder)
         {

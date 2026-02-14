@@ -5,7 +5,7 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useAudio } from "../hooks/useAudio";
-import { MusicButton } from "../components";
+import { MusicButton, Leaderboard } from "../components";
 
 type MenuProps = {
   gameStatePromise: Promise<GameState | null>;
@@ -21,6 +21,7 @@ const Menu: FC<MenuProps> = ({ gameStatePromise, playerIdPromise, onPlayerIdChan
   const navigate = useNavigate();
   const [showCredits, setShowCredits] = useState<boolean>(false);
   const [showEnterId, setShowEnterId] = useState<boolean>(false);
+  const [showLeaderboard, setShowLeaderboard] = useState<boolean>(false);
   const [enteredId, setEnteredId] = useState<string>("");
   const [loadError, setLoadError] = useState<string | null>(null);
   const [hasPlayed, setHasPlayed] = useState<boolean>(() => {
@@ -118,7 +119,7 @@ const Menu: FC<MenuProps> = ({ gameStatePromise, playerIdPromise, onPlayerIdChan
   );
   useGSAP(
     () => {
-      if (!showCredits && !showEnterId) {
+      if (!showCredits && !showEnterId && !showLeaderboard) {
         const tl = gsap.timeline();
         if (idRef.current) gsap.set(idRef.current, { opacity: 0, y: 50 });
         if (buttonsRef.current) gsap.set(buttonsRef.current.children, { opacity: 0, y: 30 });
@@ -145,7 +146,7 @@ const Menu: FC<MenuProps> = ({ gameStatePromise, playerIdPromise, onPlayerIdChan
         }
       }
     },
-    { dependencies: [showCredits, showEnterId], scope: containerRef },
+    { dependencies: [showCredits, showEnterId, showLeaderboard], scope: containerRef },
   );
   useEffect(() => {
     const musicSrc = "/audios/menu-soundtrack.mp3";
@@ -182,7 +183,7 @@ const Menu: FC<MenuProps> = ({ gameStatePromise, playerIdPromise, onPlayerIdChan
             tolik. Když budeš mít víc populace než ovcí, tak ti ovce začnou umírat.
           </p>
         </div>
-        {!showCredits && !showEnterId && (
+        {!showCredits && !showEnterId && !showLeaderboard && (
           <>
             <div className="menu__container-id" ref={idRef}>
               <p className="menu__container-id-text">
@@ -223,6 +224,17 @@ const Menu: FC<MenuProps> = ({ gameStatePromise, playerIdPromise, onPlayerIdChan
                     }}
                   >
                     Načíst hru
+                  </button>
+                </li>
+                <li className="menu__container-nav-menu-item">
+                  <button
+                    className="menu__container-nav-menu-item-button"
+                    onClick={() => {
+                      setShowLeaderboard(true);
+                      playSFX("/audios/button-click.mp3");
+                    }}
+                  >
+                    Žebříček
                   </button>
                 </li>
                 <li className="menu__container-nav-menu-item">
@@ -284,7 +296,6 @@ const Menu: FC<MenuProps> = ({ gameStatePromise, playerIdPromise, onPlayerIdChan
             </nav>
           </div>
         )}
-
         {showCredits && (
           <div ref={creditsRef} style={{ display: "contents" }}>
             <div className="menu__container-credits">
@@ -305,6 +316,9 @@ const Menu: FC<MenuProps> = ({ gameStatePromise, playerIdPromise, onPlayerIdChan
               </button>
             </div>
           </div>
+        )}
+        {showLeaderboard && (
+          <Leaderboard onClose={() => setShowLeaderboard(false)} playerId={playerId} />
         )}
       </div>
       <figure className="menu__cloud menu__cloud-1">

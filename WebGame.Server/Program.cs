@@ -27,6 +27,7 @@ namespace WebGame.Server
             using (var scope = app.Services.CreateScope())
             {
                 var dbContext = scope.ServiceProvider.GetRequiredService<GameDbContext>();
+                dbContext.Database.ExecuteSqlRaw("PRAGMA journal_mode=WAL;");
                 dbContext.Database.Migrate();
             }
             if (app.Environment.IsDevelopment())

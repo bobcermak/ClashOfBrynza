@@ -4,7 +4,6 @@ import type { Building, Map, MapBuilding } from "./../../types/mapModels";
 import MapCanvas from "./../map/MapCanvas";
 import { addSheep } from "../../lib/gameUtils";
 import { Button, Resource, TownHallLevel, Shop, BuildingMenu, GameOver, MusicButton, LevelUpGame, TutorialMonk, WinScreen } from "./../components";
-
 import { useAudio } from "../hooks/useAudio";
 import { addBuilding, deleteBuilding, upgradeBuilding } from "../../lib/mapUtils";
 import { hasEnoughToUpgrade } from "../../lib/gameUtils";
@@ -38,7 +37,51 @@ const Game: FC<GameProps> = ({ groundMapPromise, buildingsPromise, gameStateProm
     message: "",
   });
   const { playBackgroundMusic } = useAudio();
+  const [elapsedTime, setElapsedTime] = useState<number>(initialGameState.playTimeSeconds ?? 0);
 
+  useEffect(() => {
+    const fetchTime = async () => {
+      try {
+        const res = await fetch(`/api/game/time/${initialGameState.playerId}`);
+        if (res.ok) {
+          const data = await res.json();
+          setElapsedTime(data.timeInSeconds ?? 0);
+        }
+      } catch (error) {
+        console.error("Error fetching time:", error);
+      }
+    };
+    fetchTime();
+  }, [initialGameState.playerId]);
+  useEffect(() => {
+    if (gameState.playTimeSeconds !== undefined) {
+      setElapsedTime((prev) => {
+        if (Math.abs(prev - gameState.playTimeSeconds!) > 2) {
+          return gameState.playTimeSeconds!;
+        }
+        return prev;
+      });
+    }
+  }, [gameState.playTimeSeconds]);
+  useEffect(() => {
+    if (gameState.level >= 10) return;
+    const timer = setInterval(() => {
+      setElapsedTime((prev) => prev + 1);
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [gameState.level]);
+  useEffect(() => {
+    if (gameState.level >= 10) {
+      setIsOpenShop(false);
+      setCurrentBuilding(null);
+      setPlacingBuilding(null);
+    }
+  }, [gameState.level]);
+  const formatTime = (seconds: number): string => {
+    const m = Math.floor(seconds / 60).toString().padStart(2, "0");
+    const s = Math.floor(seconds % 60).toString().padStart(2, "0");
+    return `${m}:${s}`;
+  };
   useEffect(() => {
     const musicSrc = "/audios/game-soundtrack.mp3";
     playBackgroundMusic(musicSrc);
@@ -148,8 +191,7 @@ const Game: FC<GameProps> = ({ groundMapPromise, buildingsPromise, gameStateProm
     <div className="game">
       <TutorialMonk />
       {gameState.sheep <= 0 && <GameOver onRestart={handleRestart} onHome={() => navigate("/menu")} />}
-      {gameState.level >= 10 && <WinScreen onRestart={handleRestart} onHome={() => navigate("/menu")} />}
-
+      {gameState.level >= 10 && <WinScreen onRestart={handleRestart} onHome={() => navigate("/menu")} playerId={gameState.playerId} />}
       <div className="page">
         {inStarvation && gameState.sheep > 0 && (
           <div className="starvation-alert">
@@ -166,6 +208,7 @@ const Game: FC<GameProps> = ({ groundMapPromise, buildingsPromise, gameStateProm
         )}
         <div className="page__townhall-level">
           <TownHallLevel currentLevel={gameState.level} />
+          <p className="game-timer">⏱ {formatTime(elapsedTime)}</p>
           <p className="user-id">
             id: <span>{gameState.playerId}</span>
           </p>
@@ -174,7 +217,7 @@ const Game: FC<GameProps> = ({ groundMapPromise, buildingsPromise, gameStateProm
           <MusicButton />
         </div>
         <Shop
-          isOpen={isOpenShop}
+          isOpen={isOpenShop && gameState.level < 10}
           buildings={buildings}
           onClose={() => setIsOpenShop(false)}
           onBuildingBuy={(building) => {
@@ -196,7 +239,7 @@ const Game: FC<GameProps> = ({ groundMapPromise, buildingsPromise, gameStateProm
             }
           }}
           onDeleteBuilding={handleDeleteBuilding}
-          isOpen={currentBuilding !== null}
+          isOpen={currentBuilding !== null && gameState.level < 10}
           building={currentBuilding ?? undefined}
           onClose={() => setCurrentBuilding(null)}
         />

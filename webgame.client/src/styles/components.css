@@ -503,18 +503,18 @@
   width: 22px;
 }
 
-.building-menu__upgrade-section > div > div {
+.building-menu__upgrade-section>div>div {
   margin-top: 0.75rem;
 }
 
-.building-menu__upgrade-section > div > div p {
+.building-menu__upgrade-section>div>div p {
   margin: 0;
   font-size: 1rem;
   color: var(--gray-brown, #9b7260);
   line-height: 1.4;
 }
 
-.building-menu__upgrade-section > div > div p:first-child {
+.building-menu__upgrade-section>div>div p:first-child {
   font-weight: 600;
   color: var(--dark-brown, #6b4742);
 }
@@ -675,7 +675,7 @@
 @media screen and (min-width: 1701px) {
   .menu__container {
     margin-top: 4.5rem;
-    gap: 4.5rem;
+    gap: 3.5rem;
   }
 }
 
@@ -742,7 +742,7 @@
 
 .menu__container-nav-menu-item-link {
   text-decoration: none;
-  font-size: var(--text-title, 2.4375rem);
+  font-size: 2rem;
   color: var(--white, #ffffff);
   margin: 0;
   cursor:
@@ -760,7 +760,7 @@
 .menu__container-nav-menu-item-button,
 .menu__container-back-button {
   text-decoration: none;
-  font-size: var(--text-title, 2.4375rem);
+  font-size: 2rem;
   color: var(--white, #ffffff);
   margin: 0;
   padding: 0;
@@ -774,6 +774,14 @@
   border-radius: 15px;
   padding: 0.5rem;
   transition: background-color var(--transition, 0.25s ease-in-out);
+}
+
+@media (min-width: 1701px) {
+  .menu__container-nav-menu-item-link,
+  .menu__container-nav-menu-item-button,
+  .menu__container-back-button {
+    font-size: var(--text-title, 2.4375rem);
+  }
 }
 
 .menu__container-nav-menu-item-button:hover,
@@ -927,10 +935,16 @@
 }
 
 .menu__container-credits-text {
-  font-size: var(--text-title, 2.4375rem);
+  font-size: 2rem;
   color: var(--white, #ffffff);
   margin: 0;
   font-weight: 400;
+}
+
+@media (min-width: 1701px) {
+  .menu__container-credits-text {
+    font-size: var(--text-title, 2.4375rem);
+  }
 }
 
 .menu__container-credits-title-sound {
@@ -956,6 +970,7 @@
 }
 
 @media (min-width: 1701px) {
+
   .menu__container-back,
   .menu__container-enter-id {
     margin-top: 10rem;
@@ -1001,6 +1016,10 @@
   margin-top: 0.5rem;
   margin-bottom: 0;
   font-size: var(--text-subtitle, 1.5625rem);
+}
+
+.leaderboard__back-button {
+  max-width: 250px;
 }
 
 /*Game over*/
@@ -1079,9 +1098,8 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  padding: 8rem 6rem;
+  padding: 10rem 15rem;
   width: fit-content;
-  max-width: 90%;
 }
 
 .win-screen__title {
@@ -1106,7 +1124,6 @@
 .win-screen__buttons {
   display: flex;
   gap: 1.5rem;
-  margin-top: 1rem;
 }
 
 /*Intro*/
@@ -1239,6 +1256,7 @@
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   font-weight: 500;
 }
+
 /*Level up game*/
 
 .level-up-game {
@@ -1339,4 +1357,182 @@
 
 .level-up-game-over__img {
   width: 50px;
+}
+
+/*Game Timer*/
+
+.game-timer {
+  font-size: var(--text-title, 2.4375rem);
+  color: var(--white, #ffffff);
+  margin: 0;
+  font-weight: 400;
+  background-color: var(--blue, #4795a7);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+  padding: .75rem 1rem;
+  border-radius: 10px;
+  letter-spacing: 2px;
+  text-align: center;
+  min-width: 180px;
+  font-variant-numeric: tabular-nums;
+}
+
+/*WinScreen Nickname*/
+
+.win-screen__nickname {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.win-screen__nickname-label {
+  font-size: var(--text-sub, 1.5625rem);
+  color: var(--dark-brown, #6b4742);
+  margin: 0;
+  font-weight: 600;
+}
+
+.win-screen__nickname-label--small {
+  color: var(--dark-brown, #6b4742);
+  margin: 0;
+  margin-bottom: .5rem;
+}
+
+.win-screen__nickname-input {
+  font-size: var(--text-sub, 1.5625rem);
+  color: var(--dark-brown, #6b4742);
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 2px solid var(--brown, #d09862);
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  line-height: 1.45;
+  text-align: center;
+  outline: none;
+  width: 250px;
+  transition: border-color var(--transition, 0.25s ease-in-out);
+}
+
+.win-screen__nickname-input:focus {
+  border-color: var(--blue, #4795a7);
+}
+
+.win-screen__nickname-input::placeholder {
+  color: var(--gray-brown, #9b7260);
+  opacity: 0.6;
+}
+
+.win-screen__nickname-error {
+  color: red;
+  font-size: 1rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.win-screen__nickname-success {
+  font-size: var(--text-sub, 1.5625rem);
+  color: var(--dark-brown, #6b4742);
+  margin: 0;
+  font-weight: 600;
+}
+
+.win-screen__nickname-submit {
+  margin-top: 0.25rem;
+}
+
+/*Leaderboard*/
+
+.leaderboard {
+  margin-top: 1rem;
+}
+
+.leaderboard__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  min-width: 350px;
+}
+
+.leaderboard__loading,
+.leaderboard__empty {
+  font-size: var(--text-sub, 1.5625rem);
+  color: var(--white, #ffffff);
+  margin: 0;
+  opacity: 0.8;
+}
+
+.leaderboard__scroll {
+  max-height: 410px;
+  overflow-y: auto;
+  width: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+.leaderboard__scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.leaderboard__scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.leaderboard__scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.leaderboard__table th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.leaderboard__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sub, 1.5625rem);
+  color: var(--white, #ffffff);
+}
+
+.leaderboard__table th {
+  color: #ffffffab;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  padding: 0.5rem 1rem;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  text-align: left;
+  position: sticky;
+  top: 0;
+  background-color: var(--blue, #4795a7);
+  z-index: 1;
+}
+
+.leaderboard__table td {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.leaderboard__top-1 td {
+  color: #ffd700;
+  font-weight: 700;
+}
+
+.leaderboard__top-2 td {
+  color: #c0c0c0;
+  font-weight: 600;
+}
+
+.leaderboard__top-3 td {
+  color: #cd7f32;
+  font-weight: 600;
+}
+
+.leaderboard__player {
+  background-color: rgba(255, 255, 0, 0.15);
+}
+
+.leaderboard__player td {
+  font-weight: 700;
 }

@@ -13,6 +13,8 @@ namespace WebGame.Server.Models
         public int FreeSpace { get; set; }
         public int MaxPopulation { get; set; }
         public DateTime LastUpdated { get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public double PlayTimeSeconds { get; set; } = 0;
         public int Level { get; set; } = 1;
         public int BuildingMapId { get; set; }
         [ForeignKey(nameof(BuildingMapId))]
