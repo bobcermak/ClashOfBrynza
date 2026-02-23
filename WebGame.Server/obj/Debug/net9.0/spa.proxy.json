@@ -3,7 +3,7 @@
 "ServerUrl": "http://localhost:5173",
 "RedirectUrl": "",
 "LaunchCommand": "npm run dev",
-"WorkingDirectory": "C:\\Users\\bohus\\Desktop\\projects\\games\\2025-p3a-webgame-cermakdobrovsky\\WebGame.Server\\..\\webgame.client",
+"WorkingDirectory": "C:\\Users\\Bob\\Desktop\\projects\\games\\ClashOfBrynza\\WebGame.Server\\..\\webgame.client",
 "MaxTimeoutInSeconds": "120",
 "KeepRunning": "false"
 }
