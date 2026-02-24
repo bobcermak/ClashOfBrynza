@@ -1463,7 +1463,7 @@
 }
 
 .leaderboard__scroll {
-  max-height: 410px;
+  max-height: 320px;
   overflow-y: auto;
   width: 100%;
   scrollbar-width: thin;
