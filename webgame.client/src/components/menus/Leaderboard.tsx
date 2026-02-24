@@ -40,7 +40,7 @@ const Leaderboard: FC<LeaderboardProps> = ({ onClose, playerId }) => {
                 ) : entries.length === 0 ? (
                     <p className="leaderboard__empty" style={{marginTop: "12rem"}}>Zatím žádné záznamy.</p>
                 ) : (
-                    <div className={entries.length > 8 ? "leaderboard__scroll" : ""}>
+                    <div className={entries.length > 6 ? "leaderboard__scroll" : ""}>
                         <table className="leaderboard__table">
                             <thead>
                                 <tr>
