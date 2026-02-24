@@ -1,4 +1,4 @@
-import { Suspense, useState } from 'react'; 
+import { Suspense, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
 import Menu from './pages/Menu';
